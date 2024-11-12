@@ -29,9 +29,8 @@ class Category(models.Model):
 class Product(models.Model):
     STATUS=( ('True','Evet'),('False','Hayir'))
 
-    productCategory =models.ForeignKey(Category,on_delete=models.CASCADE) #her ürün bir kategoriye ait olacak.
+    product_category =models.ForeignKey(Category,on_delete=models.CASCADE) #her ürün bir kategoriye ait olacak.
     #Product modelini Category modeline bağlar ve bir kategori silindiğinde o kategoriye ait tüm ürünlerin de silinmesini sağlar.
-
     user =models.ForeignKey(User,on_delete = models.CASCADE)
     title=models.CharField(max_length=75)
     keywords=models.CharField(blank=True,max_length=300)
