@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
 # Create your models here.
@@ -52,6 +53,15 @@ class Product(models.Model):
 # mark_safe() HTML çıktısını güvenli hale getiren bir fonksiyondur.
     
     thumbnail.short_description = 'Image' #bu sütunun başlığı olarak "Image" metni gösterilir.
+
+
+    def image_preview(self):
+        if self.image:
+            return format_html('<img src="{}" style="width: 300px; height: auto;" />', self.image.url)
+        return '-'
+    image_preview.short_description = 'Current Image'
+
+
 
     def __str__(self):
         return self.title
