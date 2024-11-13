@@ -59,7 +59,7 @@ ROOT_URLCONF = 'myProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':  [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,7 +120,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'  # Statik dosyaların URL yolu
+
+# Eğer statik dosyalar belirli bir dizinde bulunuyorsa, o dizini belirt
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # Örneğin, projende 'static' adlı bir dizin varsa
+]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Statik dosyaların toplandığı ana dizin
+
 
 
 # dosya upload işlemleri için bir yol ve dizin belirtme işlemleri aşağıda yapıldı

@@ -27,4 +27,4 @@ urlpatterns = [
     path('product/', include('product.urls')),
     path('order/', include('order.urls')),
     path('',homeviews.index,name = 'index'),#name='index': URL’e kolayca referans vermek için bir isim tanımlar.
-] + static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
+]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
