@@ -1,9 +1,9 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
 # Create your models here.
 
 class Settings(models.Model):
-
     STATUS = (('True', 'True'), ('False', 'False'))
     title = models.CharField(max_length=150)
     keywords = models.CharField(max_length=255)
@@ -25,9 +25,10 @@ class Settings(models.Model):
     twitter = models.CharField(blank=True, max_length=50)
     youtube = models.CharField(blank=True, max_length=50)
 
-    aboutus = models.TextField()  # RichTextUploadingField()
-    contact = models.TextField()
-    references = models.TextField()
+    aboutus = RichTextUploadingField()  
+    contact = RichTextUploadingField()
+    references = RichTextUploadingField()
+
     status = models.CharField(max_length=10, choices=STATUS)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)

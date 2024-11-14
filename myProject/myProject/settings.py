@@ -41,8 +41,11 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'product.apps.ProductConfig',
     'order.apps.OrderConfig',
-    
+    'ckeditor',
+    'ckeditor_uploader',
 ]
+    
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -67,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                 'home.context_processors.global_settings',# her sayfada settings bilgisi gelsin
             ],
         },
     },
@@ -141,3 +145,14 @@ MEDIA_ROOT  = os.path.join(BASE_DIR,'uploads')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CKEDITOR_JQUERY_URL = \
+#     'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/images/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_CONFIGS = {
+    'default': {
+         'toolbar': 'full',#None
+    },
+}
