@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'order.apps.OrderConfig',
     'ckeditor',
     'ckeditor_uploader',
+    'mptt',
 ]
     
 
@@ -70,7 +71,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                 'home.context_processors.global_settings',# her sayfada settings bilgisi gelsin
+                'home.context_processors.global_settings',# her sayfada settings bilgisi gelsin
+                'product.context_processors.categories',
             ],
         },
     },
