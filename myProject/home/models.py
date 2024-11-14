@@ -36,3 +36,20 @@ class Settings(models.Model):
 
     def __str__(self):
         return self.title
+
+class ContactFormMessage(models.Model):
+
+    STATUS = (('New','New'),('Read','Read'),('Closed','Closed'))
+    name = models.CharField(max_length=20, blank=True)
+    email = models.CharField(max_length=20, blank=True)
+    subject = models.CharField(max_length=100, blank=True)
+    message = models.TextField(blank=True, max_length=255)
+    
+    status = models.CharField(max_length=10, choices=STATUS, default='New')
+    ip = models.CharField(max_length=15, blank=True) #Stores the IP address of the person submitting the contact form.
+    notes = RichTextUploadingField()
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.subject
