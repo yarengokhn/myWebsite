@@ -27,6 +27,7 @@ urlpatterns = [
     path('home/', include('home.urls')),
     path('product/', include('product.urls')),
     path('order/', include('order.urls')),
+    path('user/', include('user.urls')),
     path('',homeviews.index,name = 'index'),#name='index': URL’e kolayca referans vermek için bir isim tanımlar.
     path('iletisim', homeviews.iletisim, name='iletisim'),
     path('aboutus', homeviews.aboutus, name='aboutus'),
