@@ -1,7 +1,9 @@
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.forms import EmailInput, FileInput, Select, TextInput
+from django.forms import EmailInput, FileInput, ModelForm, Select, TextInput
+from product.models import Category, Product
 from user.models import UserProfile
 
 
@@ -21,10 +23,12 @@ class RegisterForm(UserCreationForm):
 CITY = [    ('Istanbul', 'Istanbul'),
     ('Ankara', 'Ankara'),
     ('Izmir', 'Izmir'),]
+
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['phone_number', 'address', 'city', 'state', 'image']
+        
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfile
@@ -45,4 +49,21 @@ class UserUpdateForm(forms.ModelForm):
             'email': EmailInput(attrs={'class': 'input', 'placeholder': 'email'}),
             'first_name': TextInput(attrs={'class': 'input', 'placeholder': 'first_name'}),
             'last_name': TextInput(attrs={'class': 'input', 'placeholder': 'last_name'}),
+        }        
+
+
+class ProductForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ['product_category', 'title', 'keywords', 'description', 'image',
+                  'price', 'detail']
+        widgets = {
+            'product_category': Select(attrs={'class': 'input', 'placeholder': 'Category'},
+                               choices=Category.objects.all()),
+            'title': TextInput(attrs={'class': 'input', 'placeholder': 'Title'}),
+            'keywords': TextInput(attrs={'class': 'input', 'placeholder': 'Keywords'}),
+            'description': TextInput(attrs={'class': 'input', 'placeholder': 'Description'}),
+            'image': FileInput(attrs={'class': 'input', 'placeholder': 'Image', }),
+            'price': TextInput(attrs={'class': 'input', 'placeholder': 'Price'}),
+            'detail': CKEditorUploadingWidget(),
         }        
