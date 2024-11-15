@@ -1,5 +1,6 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from product.forms import SearchForm
 from product.models import Category, Images, Product
 
 
@@ -41,5 +42,15 @@ def productDetail(request,id,slug):
 
 
 
+def search(request):
+    if request.method =='POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            query =form.cleaned_data['query']
+            results =Product.objects.filter(title__icontains = query)
+            context = {'results':results}
+            return render(request, 'search.html', context)
+    return HttpResponseRedirect('/')
 
+        
 

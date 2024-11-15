@@ -31,6 +31,7 @@ urlpatterns = [
     path('iletisim', homeviews.iletisim, name='iletisim'),
     path('aboutus', homeviews.aboutus, name='aboutus'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('search/', productviews.search, name='search'),
     path('product/<int:id>/<slug:slug>/', productviews.productDetail, name='productDetail'),
     path('category/<int:id>/<slug:slug>/', productviews.categoryProducts, name='categoryProducts' ),
     
