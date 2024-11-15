@@ -10,7 +10,8 @@ from product.models import Product
 # Create your views here.
 def index(request):
     slider = Product.objects.filter(status=True).order_by('?')[:4]
-    context = {"page": "home",
+    trendy_product = Product.objects.order_by('viewcount')[:4]
+    context = {"page": "home",'trendy_product':trendy_product,
                "slider": slider}
     
     return render(request,'index.html',context)
@@ -37,5 +38,5 @@ def iletisim(request):
     return render(request, 'iletisim.html', context)
 
 def aboutus(request):
-    context = {"sayfa": "About Us "}
+    cotext = {"sayfa": "About Us "}
     return render(request, 'aboutus.html', context)
