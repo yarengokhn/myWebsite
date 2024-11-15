@@ -1,8 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from user.forms import LoginForm, RegisterForm
+from user.forms import (LoginForm, ProfileUpdateForm, RegisterForm,
+                        UserUpdateForm)
+from user.models import UserProfile
 
 
 # Create your views here.
@@ -21,7 +24,7 @@ def user_login(request):
             if user is not None:
                 login(request,user)
                 messages.success(request, 'Oturum Açma Başarılı')
-                return HttpResponseRedirect('/user/login')
+                return HttpResponseRedirect('/user/')
             else:
                 messages.error(request, 'Oturum Açma Başarısız')
                 return HttpResponseRedirect('/user/login')
@@ -42,10 +45,34 @@ def user_register(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, 'Kayıt Başarılı')
-                return HttpResponseRedirect('/user/register')
+                return HttpResponseRedirect('/user/')
             else:
                 messages.error(request, 'Kayıt Başarısız')
                 return HttpResponseRedirect('/user/register')
     form = RegisterForm
     context = {'form': form}
     return render(request, 'register.html', context)
+
+@login_required(login_url='/user/login/')
+def user_profile(request):
+    user = request.user
+    profile = UserProfile.objects.get(user=user)
+    context = {'profile': profile}
+    return render(request, 'user_profile.html',context)
+
+
+@login_required(login_url='/user/login/')
+def user_update(request):
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Kullanıcı Güncelleme Başarılı')
+            return HttpResponseRedirect('/user')
+    else:
+        user_form = UserUpdateForm(instance=request.user)
+        profile_form = ProfileUpdateForm(instance=request.user.userprofile)
+        context = {'user_form': user_form, 'profile_form':profile_form}
+        return render(request, 'user_update.html',context)

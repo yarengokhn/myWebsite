@@ -95,7 +95,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                aria-selected="false">Reviews <span>(1)</span></a>
+                                aria-selected="false">Reviews <span>{{comments.count}}</span></a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -130,77 +130,67 @@
                             
         <div class="row">
             <div class="col-md-6">
-                
-                <h4 class="mb-4"> 1 review for {{product.title}}</h4>
+              
+                <h4 class="mb-4">{{comments.count}} Reviews for {{product.title}}</h4>
+
+                {% for yorum in comments %}
                 <div class="media mb-4">
-                    <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                    <img src="img/user.jpg" alt="User Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                     <div class="media-body">
-                        <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
+                        <h6>{{ yorum.user }} - <br> {{ yorum.subject }} - 
+                            <small><i>{{ yorum.create_at }}</i></small>
+                        </h6>
                         <div class="text-primary mb-2">
+                            {% for c in "a"|ljust:yorum.rate %}
                             <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <i class="far fa-star"></i>
+                            {% endfor %}
                         </div>
-                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+                        <p>{{ yorum.comment }}</p>
                     </div>
                 </div>
+                {% endfor %}
             </div>
+        
             <div class="col-md-6">
                 <div class="contact-form spad">
                     <div class="container">
-                       
-                                                <div class="col-lg-12">
-                                                    <div class="contact__form__title">
-                                                        <h2>Leave a Review</h2>
-                                                        <small>Your email address will not be published. Required fields are marked *</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <form method="post" action="#">
-                                                {% csrf_token %}
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <h4 class="mb-4">Your Rating *</h4>
-                                                        <div class="d-flex my-3">
-                                                            <p class="mb-0 mr-2">Your Rating * :</p>
-                                                            <div class="text-primary">
-                                                                <i class="far fa-star"></i>
-                                                                <i class="far fa-star"></i>
-                                                                <i class="far fa-star"></i>
-                                                                <i class="far fa-star"></i>
-                                                                <i class="far fa-star"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="message">Your Review *</label>
-                                                            <textarea id="message" cols="30" rows="5" class="form-control" placeholder="Your message" name="comment"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Your Name *</label>
-                                                            <input type="text" class="form-control" id="name" placeholder="Your name" name="name" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="email">Your Email *</label>
-                                                            <input type="email" class="form-control" id="email" placeholder="Your email" name="email" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <button type="submit" class="site-btn">Submit Review</button>
-                                                    </div>
-                                                </div>
-                                            </form>
+                        <div class="col-lg-12">
+                            <div class="contact__form__title">
+                                <h2>Leave a Review</h2>
+                                <small>Your email address will not be published. Required fields are marked *</small>
+                            </div>
+                        </div>
                     </div>
-                </div>
         
-</section>
+                    <!-- Form Başlangıcı -->
+                    <form method="post" action="/product/addcomment/{{ product.id }}">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+        
+                        {% if user.is_authenticated %}
+                        <div class="col-md-12">
+                            <h4 class="mb-4">Your Rating *</h4>
+                            <div class="d-flex my-3">
+                                <p class="mb-0 mr-2">Your Rating:</p>
+                                <div class="text-primary">
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+        
+                            <button type="submit" class="site-btn">Submit Review</button>
+                        </div>
+                        {% else %}
+                        <p>You need to <a href="/login/">log in</a> to leave a review.</p>
+                        {% endif %}
+                    </form>
+                    <!-- Form Sonu -->
+                </div>
+            </div>
+        </section>
 <!-- Product Details Section End -->
 
 <!-- Related Product Section Begin -->

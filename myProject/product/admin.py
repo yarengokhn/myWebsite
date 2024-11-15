@@ -1,6 +1,6 @@
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
-from product.models import Category, Images, Product
+from product.models import Category, Comment, Images, Product
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -83,3 +83,9 @@ class ImageAdmin(admin.ModelAdmin):
 
 admin.site.register(Images, ImageAdmin)
 
+
+class CommentAdmin(admin.ModelAdmin):
+    list_filter = ('status',)
+
+
+admin.site.register(Comment, CommentAdmin)

@@ -96,7 +96,7 @@
                         <div class="header__top__right__auth">
 
                             {% if user.id is not None %}
-                            <a href="{% url 'user_login'%}"><i class="fa fa-user"></i> {{user.username}}</a>
+                            <a href="{% url 'user_profile'%}"><i class="fa fa-user"></i> {{user.username}}</a>
                             <a href="{% url 'user_logout'%}"></i> Logout</a>
                             
                             
