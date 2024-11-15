@@ -38,5 +38,5 @@ def iletisim(request):
     return render(request, 'iletisim.html', context)
 
 def aboutus(request):
-    cotext = {"sayfa": "About Us "}
+    context = {"sayfa": "About Us "}
     return render(request, 'aboutus.html', context)

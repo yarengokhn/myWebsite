@@ -4,9 +4,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from order.forms import ShopCartForm
-from order.models import AddFavourite, ShopCart
+from django.utils.crypto import get_random_string
+from order.forms import OrderForm, ShopCartForm
+from order.models import AddFavourite, Order, OrderProduct, ShopCart
 from product.models import Product
+from user.models import UserProfile
 
 favori_list = []
 
@@ -57,7 +59,7 @@ def shopcart(request):
         total += rs.product.price * rs.quantity
     context = {'shopcart': shopcart,
                'total': total,}
-    return render(request, 'shopcart_products.html', context)
+    return render(request, 'shop_cart.html', context)
 @login_required(login_url='/login')  # Check login
 def deletefromcart(request, id):
     url = request.META.get('HTTP_REFERER')  # get last url
@@ -106,9 +108,11 @@ def addtocart(request, id):
         request.session['cart_items'] = ShopCart.objects.filter(user_id=current_user.id).count()
         messages.success(request, "Product added to Shopcart")
         return HttpResponseRedirect(url)
+    
+def orderproduct(request):
     current_user = request.user
     shopcart = ShopCart.objects.filter(user_id=current_user.id)
-    total = 0
+    total = 0 #fatura
     for rs in shopcart:
         total += rs.price * rs.quantity
     if request.method == 'POST':  # if there is a post

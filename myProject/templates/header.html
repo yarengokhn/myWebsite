@@ -15,7 +15,7 @@
             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
             <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
         </ul>
-        <div class="header__cart__price">item: <span>$150.00</span></div>
+        <div class="header__cart__price">item: <span>{{total}}</span></div>
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__language">
@@ -34,17 +34,16 @@
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
             <li class="active"><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="./shop-grid.html">Shop</a></li>
+            <li><a href="{% url 'search'%}">Shop</a></li>
             <li><a href="#">Pages</a>
                 <ul class="header__menu__dropdown">
                     <li><a href="./shop-details.html">Shop Details</a></li>
-                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                    <li><a href="{% url 'shopcart'%}">Shoping Cart</a></li>
                     <li><a href="./checkout.html">Check Out</a></li>
-                    <li><a href="./blog-details.html">Blog Details</a></li>
                 </ul>
             </li>
-            <li><a href="./aboutus.html">About Us</a></li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="{% url 'aboutus'%}">About Us</a></li>
+            <li><a href="{% url 'iletisim'%}">Contact</a></li>
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
@@ -129,11 +128,11 @@
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="{% url 'index'%}">Home</a></li>
-                        <li><a href="./shop-grid.html">Shop</a></li>
+                        <li><a href="{% url 'search' %}">Shop</a></li>
                         <li><a href="#">Pages</a>
                             <ul class="header__menu__dropdown">
                                 <li><a href="./shop-details.html">Shop Details</a></li>
-                                <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                                <li><a href="{% url 'shopcart'%}">Shoping Cart</a></li>
                                 <li><a href="./checkout.html">Check Out</a></li>
                             </ul>
                         </li>
@@ -151,7 +150,7 @@
                         </a>
                        {# {% endif %}#}
                     </li>
-                        <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>0</span>
+                        <li><a href="/order/shopcart"><i class="fa fa-shopping-bag"></i> <span>{{request.session.cart_items}}</span>
                         </a>
                       
                     </li>
