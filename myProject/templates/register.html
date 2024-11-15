@@ -1,0 +1,38 @@
+{% extends 'home.html' %}
+{% block title %} {{ settings.title }} {% endblock %}
+{% block keywords %} {{ settings.keywords }} {% endblock %}
+{% block description %} {{ settings.description }} {% endblock %}
+{% block headBlogu %}<link href="{{ settings.icon.url }}" rel="icon">{% endblock %}
+{% block body %}
+    <!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2"> Register Page</span></h2>
+        </div>
+        <div class="row px-xl-5">
+            <div class="col-lg-7 mb-5">
+                <div class="contact-form">
+          
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'success' %}
+                    <div class="alert alert-success">{{ message }}</div>
+                            {% else %}
+                                <div class="alert alert-danger">{{ message }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <form name="sentMessage" id="contactForm" novalidate="novalidate" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+         
+        </div>
+    </div>
+    <!-- Contact End -->
+{% endblock %}
