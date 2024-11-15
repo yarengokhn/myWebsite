@@ -4,11 +4,15 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from home.forms import ContactForm
 from home.models import ContactFormMessage, Settings
+from product.models import Product
 
 
 # Create your views here.
 def index(request):
-    context = {"page":"home"}
+    slider = Product.objects.filter(status=True).order_by('?')[:4]
+    context = {"page": "home",
+               "slider": slider}
+    
     return render(request,'index.html',context)
 
 def iletisim(request):

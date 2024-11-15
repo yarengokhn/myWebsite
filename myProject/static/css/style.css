@@ -556,6 +556,75 @@ ol {
 	display: none;
 }
 
+
+/*
+product review 
+*/
+.product__details__tab h4 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Style the review stars */
+.product__details__tab .text-primary {
+    color: #FFD700; /* Gold color for stars */
+}
+
+.product__details__tab .text-primary i {
+    font-size: 16px;
+    margin-right: 2px;
+}
+
+/* Style for the reviewer name and date */
+.product__details__tab .media h6 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+.product__details__tab .media small {
+    font-size: 12px;
+    color: #888;
+}
+
+/* Style the review text */
+.product__details__tab .media p {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Style the review form */
+.product__details__tab form .form-group label {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
+
+.product__details__tab form .form-control {
+    border-radius: 5px;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.product__details__tab form .btn-primary {
+    background-color: #ff6600;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product__details__tab form .btn-primary:hover {
+    background-color: #ff4500;
+}
 /*---------------------
   Hero
 -----------------------*/
@@ -3159,6 +3228,7 @@ ol {
 		overflow: hidden;
 	}
 }
+
 
 /* Wide Mobile = 480px */
 

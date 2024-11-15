@@ -18,6 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from home import views as homeviews
+from product import views as productviews
 
 from myProject import settings
 
@@ -30,5 +31,7 @@ urlpatterns = [
     path('iletisim', homeviews.iletisim, name='iletisim'),
     path('aboutus', homeviews.aboutus, name='aboutus'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('product/<int:id>/<slug:slug>/', productviews.productDetail, name='productDetail'),
+    path('category/<int:id>/<slug:slug>/', productviews.categoryProducts, name='categoryProducts' ),
     
 ]  +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

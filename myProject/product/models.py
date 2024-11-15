@@ -1,3 +1,4 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.html import format_html
@@ -17,8 +18,7 @@ class Category(MPTTModel):
     status = models.CharField(max_length=10, choices=STATUS)
     slug = models.SlugField(null=False, unique=True)
 
-    parent = TreeForeignKey('self', blank=True, null=True,
-                               related_name='children', on_delete=models.CASCADE)
+    parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
    
     create_at=models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
@@ -27,19 +27,16 @@ class Category(MPTTModel):
     filter_options = models.JSONField(blank=True, null=True) 
 
     class MPTTMeta:
-        order_insertion_by = ['title']
-
-
+     order_insertion_by = ['title'] 
 
 
     def __str__(self):
-        full_path=[self.title]
-        k= self.parent
+        full_path = [self.title]
+        k = self.parent
         while k is not None:
             full_path.append(k.title)
-            k =k.parent
-        return '/'.join(full_path)    
-
+            k = k.parent
+        return '/'.join(full_path)
        
 
 
@@ -55,11 +52,14 @@ class Product(models.Model):
     image=models.ImageField(blank=True,upload_to='images/')
     price=models.FloatField()
     amount=models.IntegerField(default=0)
-    detail=models.TextField()
+
+    detail=RichTextUploadingField()
     status=models.CharField(max_length=10,choices=STATUS,default='False')
     create_at=models.DateTimeField(auto_now_add=True)
     update_at=models.DateTimeField(auto_now=True)
     slug=models.SlugField(null=False,unique=True)
+    
+    viewcount=models.IntegerField(default=0)
 
     def thumbnail(self):
         if self.image:

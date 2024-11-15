@@ -1,4 +1,5 @@
 from django.contrib import admin
+from mptt.admin import DraggableMPTTAdmin
 from product.models import Category, Images, Product
 
 
@@ -19,29 +20,37 @@ class CategoryAdmin2(DraggableMPTTAdmin):
                     'related_products_count', 'related_products_cumulative_count')
     list_display_links = ('indented_title',)
     prepopulated_fields = {'slug': ('title',)}
+
     def get_queryset(self, request):
         qs = super().get_queryset(request)
+        
+        # Order categories in depth-first order by using MPTT's method
+        qs = qs.order_by('tree_id', 'lft')  # Depth-first order
+        
         # Add cumulative product count
         qs = Category.objects.add_related_count(
                 qs,
                 Product,
-                'category',
+                'product_category',
                 'products_cumulative_count',
                 cumulative=True)
-        # Add non cumulative product count
+        
+        # Add non-cumulative product count
         qs = Category.objects.add_related_count(qs,
-                 Product,
-                 'category',
-                 'products_count',
-                 cumulative=False)
+                Product,
+                'product_category',
+                'products_count',
+                cumulative=False)
         return qs
+
     def related_products_count(self, instance):
         return instance.products_count
     related_products_count.short_description = 'Related products (for this specific category)'
     def related_products_cumulative_count(self, instance):
         return instance.products_cumulative_count
     related_products_cumulative_count.short_description = 'Related products (in tree)'
-    pass
+   
+
 
 admin.site.register(Category, CategoryAdmin2)
 

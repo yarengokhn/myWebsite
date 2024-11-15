@@ -1,0 +1,50 @@
+{% extends 'home.html' %}
+{% block title %} {{ category.title }} {% endblock %}
+{% block keywords %} {{ category.keywords }} {% endblock %}
+{% block description %} {{ category.description }} {% endblock %}
+{% block headBlogu %}<link href="{{ settings.icon.url }}" rel="icon">{% endblock %}
+{% block body %} 
+<!-- Featured Section Begin -->
+<section class="featured spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2> {{category.title}}</h2>
+                </div>
+                <div class="featured__controls">
+                    <ul>
+                        <li class="active" data-filter="*">All</li>
+                        <!-- Kategorileri dinamik olarak listeleme -->
+                        {% for category in categories %}
+                            <li data-filter=".{{ category.slug }}">{{ category.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row featured__filter">
+            <!-- Ürünleri dinamik olarak listeleme -->
+            {% for product in productsInCategory %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mix {{ product.category.slug }}">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{{ product.image.url }}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="{% url 'productDetail' product.id product.slug %}">{{ product.title }}</a></h6>
+                            <h5>${{ product.price }}</h5>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    
+</section>
+
+<!-- Featured Section End -->
+ {% endblock%}
