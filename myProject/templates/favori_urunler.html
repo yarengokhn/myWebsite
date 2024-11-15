@@ -1,0 +1,54 @@
+{% extends 'home.html' %}
+{% block title %} {{ settings.title }} {% endblock %}
+{% block keywords %} {{ settings.keywords }} {% endblock %}
+{% block description %} {{ settings.description }} {% endblock %}
+{% block headBlogu %}<link href="{{ settings.icon.url }}" rel="icon">{% endblock %}
+{% block body %}
+  
+    
+    <!-- Shoping Cart Section Begin -->
+    <section class="shoping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="shoping__product">Favourite Products</th>
+                                    <th>Price</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in favorites %}
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                        <img src="{{ product.product.image.url}}" width ="50" alt="">
+                                        <h5> {{ product.product.title}}</h5>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        {{ product.product.price}}
+                                    </td>
+                                   
+                                    <td class="shoping__cart__item__close">
+                                        <a href="/order/delfavorite/{{ product.product.id }}">
+                                            <button class="btn btn-sm btn-primary">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {%endfor%}
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    <!-- Shoping Cart Section End -->
+
+{% endblock %}

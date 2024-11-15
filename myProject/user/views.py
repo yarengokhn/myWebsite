@@ -54,7 +54,7 @@ def user_register(request):
     return render(request, 'register.html', context)
 
 @login_required(login_url='/user/login/')
-def user_profile(request):
+def user_profile(request, current_user=None):
     user = request.user
     profile = UserProfile.objects.get(user=user)
     context = {'profile': profile}

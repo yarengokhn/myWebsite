@@ -74,6 +74,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'home.context_processors.global_settings',# her sayfada settings bilgisi gelsin
                 'product.context_processors.categories',
+                'myProject.context_processors.favori_check'
             ],
         },
     },

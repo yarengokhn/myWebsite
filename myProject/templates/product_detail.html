@@ -66,7 +66,8 @@
                         </div>
                     </div>
                     <a href="#" class="primary-btn">ADD TO CARD</a>
-                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+
+                    <a href="{% url 'addfavorite' product.id %}"  class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <ul>
                         <li><b>Amount</b> <span>{{product.amount}}</span></li>
                         <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
@@ -135,7 +136,7 @@
 
                 {% for yorum in comments %}
                 <div class="media mb-4">
-                    <img src="img/user.jpg" alt="User Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                    <img src="{{ yorum.user.userprofile.image.url}}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                     <div class="media-body">
                         <h6>{{ yorum.user }} - <br> {{ yorum.subject }} - 
                             <small><i>{{ yorum.create_at }}</i></small>
