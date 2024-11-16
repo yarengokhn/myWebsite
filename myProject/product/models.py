@@ -42,8 +42,11 @@ class Category(MPTTModel):
 
 class Product(models.Model):
     STATUS=( ('True','Evet'),('False','Hayir'))
-
-    product_category =models.ForeignKey(Category,on_delete=models.CASCADE) #her ürün bir kategoriye ait olacak.
+    product_category = models.ForeignKey(
+        Category, 
+        on_delete=models.CASCADE, 
+        related_name='products'  # İlişkili ürünleri çağırmak için kullanılır
+    )#her ürün bir kategoriye ait olacak.
     #Product modelini Category modeline bağlar ve bir kategori silindiğinde o kategoriye ait tüm ürünlerin de silinmesini sağlar.
     user =models.ForeignKey(User,on_delete = models.CASCADE)
     title=models.CharField(max_length=75)

@@ -33,10 +33,7 @@
                     <div class="hero__search__form">
                         <form action="/search/" method = "post">
                             {% csrf_token %}
-                            <div class="hero__search__categories">
-                                All Categories
-                                <span class="arrow_carrot-down"></span>
-                            </div>
+                            
                             <input type="text" name = "query" placeholder="What do you need?">
                             <button type="submit" class="site-btn">SEARCH</button>
                         </form>
@@ -46,15 +43,15 @@
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5>+65 11.188.888</h5>
+                            <h5>{{settings.phone}}</h5>
                             <span>support 24/7 time</span>
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="{% static 'img/hero/banner.jpg' %}">
+                <div class="hero__item set-bg" data-setbg="{% static 'img/hero/banner.png' %}">
                     <div class="hero__text">
-                        <span>FRUIT FRESH</span>
-                        <h2>Vegetable <br />100% Organic</h2>
+                        <span>Everything You need</span>
+                        <h2>Clothes <br />Every size</h2>
                         <p>Free Pickup and Delivery Available</p>
                         <a href="#" class="primary-btn">SHOP NOW</a>
                     </div>

@@ -29,7 +29,7 @@ def productDetail(request,id,slug):
 
 
     images = Images.objects.filter(id =id)
-    category=Category.objects.get(pk=id)
+    category=Category.objects.get(id=id)
 
     products_in_category = Product.objects.filter(product_category =product.product_category)
 

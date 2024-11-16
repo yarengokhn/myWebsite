@@ -1,9 +1,11 @@
 {% load static %}
 
 
-                {% if page == "home" or page == "" %}
-                {% include 'hero_home.html' %}
-                {% else %}
-                {% include 'hero_normal.html' %}
-                {% endif %}
+{% if page == "home" or page == "" %}
+    {% include 'hero_home.html' %}
+{% elif page == "About Us" or page == "Contact" %}
+    <!-- Hiçbir şey eklenmez -->
+{% else %}
+    {% include 'hero_normal.html' %}
+{% endif %}
         
