@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'order.apps.OrderConfig',
     'user.apps.UserConfig',
+    'productappi.apps.ProductappiConfig',
     'ckeditor',
     'ckeditor_uploader',
     'mptt',
+    'rest_framework',
 ]
     
 
