@@ -38,7 +38,7 @@ def iletisim(request):
     return render(request, 'iletisim.html', context)
 
 def aboutus(request):
-    context = {"page": "About Us "}
+    context = {"page": "About Us"}
     return render(request, 'aboutus.html', context)
 
 

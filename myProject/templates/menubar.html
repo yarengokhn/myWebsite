@@ -3,8 +3,15 @@
 
 {% if page == "home" or page == "" %}
     {% include 'hero_home.html' %}
-{% elif page == "About Us" or page == "Contact" %}
+{% elif page == "About Us" %}
     <!-- Hiçbir şey eklenmez -->
+
+{% elif page == "Contact"%} 
+    <!-- Hiçbir şey eklenmez -->
+
+{% elif page == "shopcart"%}  
+    <!-- Hiçbir şey eklenmez -->
+
 {% else %}
     {% include 'hero_normal.html' %}
 {% endif %}

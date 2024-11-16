@@ -13,7 +13,7 @@
                         {% recursetree categories %}
                             {% if node.is_leaf_node %}
                                 <li>
-                                    <a href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+                                    <a href="/category/">{{ node.title }}</a>
                                 </li>
                             {% else %}
                                 <li>
