@@ -9,4 +9,5 @@ def favori_check(request):
         return {'favori_itemss': request.session['favori_items'],'cart_items':request.session['cart_items']}
     else:
         request.session['favori_items'] = 0
-        return {'favori_itemss': request.session['favori_items']}
+        request.session['cart_items'] = 0
+        return {'favori_itemss': request.session['favori_items'],'cart_items':request.session['cart_items']}

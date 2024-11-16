@@ -60,6 +60,7 @@ def shopcart(request):
     context = {'shopcart': shopcart,
                'total': total,}
     return render(request, 'shop_cart.html', context)
+
 @login_required(login_url='/login')  # Check login
 def deletefromcart(request, id):
     url = request.META.get('HTTP_REFERER')  # get last url
@@ -68,6 +69,10 @@ def deletefromcart(request, id):
     messages.success(request, "Your item deleted form Shopcart.")
     request.session['cart_items'] = ShopCart.objects.filter(user_id=current_user.id).count()
     return HttpResponseRedirect(url)
+
+
+
+
 @login_required(login_url='/login')  # Check login
 def addtocart(request, id):
     url = request.META.get('HTTP_REFERER')  # get last url

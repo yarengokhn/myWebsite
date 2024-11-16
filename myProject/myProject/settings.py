@@ -135,7 +135,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",  # Örneğin, projende 'static' adlı bir dizin varsa
 ]
 
-STATIC_ROOT = BASE_DIR / "staticfiles"  # Statik dosyaların toplandığı ana dizin
+STATIC_ROOT = BASE_DIR / "statics"  # Statik dosyaların toplandığı ana dizin
 
 
 
