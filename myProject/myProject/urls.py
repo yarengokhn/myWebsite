@@ -37,4 +37,5 @@ urlpatterns = [
     path('product/<int:id>/<slug:slug>/', productviews.productDetail, name='productDetail'),
     path('category/<int:id>/<slug:slug>/', productviews.categoryProducts, name='categoryProducts' ),
     
-]  +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]  +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
+      + static(settings.STATIC_URL,document_root =settings.STATIC_ROOT)
