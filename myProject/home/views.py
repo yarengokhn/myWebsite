@@ -40,3 +40,8 @@ def iletisim(request):
 def aboutus(request):
     context = {"page": "About Us "}
     return render(request, 'aboutus.html', context)
+
+
+def checkout(request):
+    context = {"page": "Check out "}
+    return render(request, 'checking_out.html', context)

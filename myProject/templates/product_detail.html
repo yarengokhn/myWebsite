@@ -65,7 +65,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="primary-btn">ADD TO CARD</a>
+                    <a href="{% url 'addtocart' product.id %}" class="primary-btn">ADD TO CARD</a>
 
                     <a href="{% url 'addfavorite' product.id %}"  class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <ul>

@@ -31,6 +31,7 @@ urlpatterns = [
     path('',homeviews.index,name = 'index'),#name='index': URL’e kolayca referans vermek için bir isim tanımlar.
     path('iletisim', homeviews.iletisim, name='iletisim'),
     path('aboutus', homeviews.aboutus, name='aboutus'),
+    path('checkout', homeviews.checkout, name='checkout'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('search/', productviews.search, name='search'),
     path('product/<int:id>/<slug:slug>/', productviews.productDetail, name='productDetail'),

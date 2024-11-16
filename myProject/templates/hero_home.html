@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %}{% load mptt_tags %}
 <!-- Hero Section Begin -->
 <section class="hero">
     <div class="container">
@@ -10,31 +10,35 @@
                         <span>All departments</span>
                     </div>
                     <ul>
-                        {% for category in categories %}
-                        <li>
-                            <a href="{% url 'categoryProducts' category.id category.slug %}">{{ category.title }}</a>
-                            {% if category.children.all %}
-                                <ul class="submenu">
-                                    {% for subcategory in category.children.all %}
-                                        <li>
-                                            <a href="{% url 'categoryProducts' subcategory.id subcategory.slug %}">{{ subcategory.title }}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
+                        {% recursetree categories %}
+                            {% if node.is_leaf_node %}
+                                <li>
+                                    <a href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+                                    {% if node.get_children %}
+                                        <ul class="submenu">
+                                            {% for child in node.get_children %}
+                                                <li>
+                                                    <a href="/category/{{ child.id }}/{{ child.slug }}">{{ child.title }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
                             {% endif %}
-                        </li>
-                    {% endfor %}
-                    
+                        {% endrecursetree %}
                     </ul>
                 </div>
             </div>
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form action="/search/" method = "post">
+                        <form action="/search/" method="post">
                             {% csrf_token %}
-                            
-                            <input type="text" name = "query" placeholder="What do you need?">
+                            <input type="text" name="query" placeholder="What do you need?">
                             <button type="submit" class="site-btn">SEARCH</button>
                         </form>
                     </div>
@@ -43,7 +47,7 @@
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5>{{settings.phone}}</h5>
+                            <h5>{{ settings.phone }}</h5>
                             <span>support 24/7 time</span>
                         </div>
                     </div>
