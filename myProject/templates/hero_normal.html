@@ -1,4 +1,4 @@
-  {% load static %}
+  {% load static %}{% load mptt_tags %}
   <!-- Hero Section Begin -->
    <section class="hero hero-normal">
     <div class="container">
@@ -7,23 +7,29 @@
                 <div class="hero__categories">
                     <div class="hero__categories__all">
                         <i class="fa fa-bars"></i>
-                        <span>All departments</span>
+                        <span>All Categories</span>
                     </div>
                     <ul>
-                        {% for category in categories %}
-                        <li>
-                            <a href="{% url 'categoryProducts' category.id category.slug %}">{{ category.title }}</a>
-                            {% if category.children.all %}
-                                <ul class="submenu">
-                                    {% for subcategory in category.children.all %}
-                                        <li>
-                                            <a href="{% url 'categoryProducts' subcategory.id subcategory.slug %}">{{ subcategory.title }}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
+                        {% recursetree categories %}
+                        {% if node.is_leaf_node %}
+                            <li>
+                                <a href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+                                {% if node.get_children %}
+                                    <ul class="submenu">
+                                        {% for child in node.get_children %}
+                                            <li>
+                                                <a href="/category/{{ child.id }}/{{ child.slug }}">{{ child.title }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    {% endrecursetree %}
                     
                     </ul>
                 </div>
@@ -53,3 +59,4 @@
     </div>
 </section>
 <!-- Hero Section End -->
+

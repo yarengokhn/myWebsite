@@ -685,21 +685,28 @@ product review
 }
 
 .hero__categories ul {
-	border: 1px solid #ebebeb;
-	padding-left: 40px;
-	padding-top: 10px;
-	padding-bottom: 12px;
+    border: 1px solid #ebebeb;
+    padding-left: 40px;
+    padding-top: 10px;
+    padding-bottom: 12px;
 }
 
 .hero__categories ul li {
-	list-style: none;
+    list-style: none;
+    margin-bottom: 10px; /* Ana menü öğeleri arasına boşluk ekler */
 }
 
 .hero__categories ul li a {
-	font-size: 16px;
-	color: #1c1c1c;
-	line-height: 39px;
-	display: block;
+    font-size: 16px;
+    color: #1c1c1c;
+    line-height: 39px;
+    display: block;
+    padding: 5px 0; /* Menü öğeleri arasına iç boşluk ekler */
+}
+
+.hero__categories .submenu li {
+    margin-left: 20px; /* Alt menü öğelerinin ana menüden biraz daha içeride olmasını sağlar */
+    margin-bottom: 5px; /* Alt menü öğeleri arasına boşluk ekler */
 }
 
 .hero__search {

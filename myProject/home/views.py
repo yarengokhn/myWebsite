@@ -10,7 +10,7 @@ from product.models import Product
 # Create your views here.
 def index(request):
     slider = Product.objects.filter(status=True).order_by('?')[:4]
-    trendy_product = Product.objects.order_by('viewcount')[:4]
+    trendy_product = Product.objects.order_by('viewcount')[:20]
     context = {"page": "home",'trendy_product':trendy_product,
                "slider": slider}
     
